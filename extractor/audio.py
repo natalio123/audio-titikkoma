@@ -1,6 +1,6 @@
 import yt_dlp
 
-def extract_audio(id: int, url: str) -> None:
+def extract_audio(id: int, url: str):
     ytdlp_ops = {
         'extract_flat': 'discard_in_playlist',
         'format': 'bestaudio/best', # comment this to get both audio and video
@@ -27,5 +27,6 @@ def extract_audio(id: int, url: str) -> None:
 
     with yt_dlp.YoutubeDL(ytdlp_ops) as ydl:
         info = ydl.extract_info(url) 
-        sanitized_info = ydl.sanitize_info(info)
-        print(sanitized_info)
+        if info:
+            return info
+        return {}
