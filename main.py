@@ -1,10 +1,6 @@
 import pathlib
 import pandas as pd
-
-import yt_dlp
-
-def extract_video(url: str):
-    pass
+from extractor.audio import extract_audio
 
 def main():
     # TODO: need to check video path and extraction method
@@ -18,32 +14,7 @@ def main():
     video_urls: list[str] = df['video'].to_list()
     
     for url in video_urls:
-        ytdlp_ops = {
-            'extract_flat': 'discard_in_playlist',
-            'format': 'bestaudio/best', # comment this to get noth audio and video
-            'fragment_retries': 10,
-            'ignoreerrors': 'only_download',
-            'max_sleep_interval': 100.0,
-            'postprocessors': [{'key': 'FFmpegExtractAudio',
-                                'nopostoverwrites': False,
-                                'preferredcodec': 'best',
-                                'preferredquality': '5'},
-                                {'key': 'FFmpegConcat',
-                                'only_multi_video': True,
-                                'when': 'playlist'}],
-            'retries': 10,
-            'sleep_interval': 60.0,
-            'verbose': True,
-            'warn_when_outdated': True,
-            'paths': {
-                'home': './extraction_result/audio'
-            },
-        }
-        with yt_dlp.YoutubeDL(ytdlp_ops) as ydl:
-            info = ydl.extract_info(url) 
-            sanitized_info = ydl.sanitize_info(info)
-            print(sanitized_info)
-
+        extract_audio(url)
 
 if __name__ == "__main__":
     main()
