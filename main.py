@@ -25,14 +25,14 @@ def main():
         _new_row.append({
             "id": row_id,
             "video": video_url,
-            "title": info["title"],
-            "description": info["description"],
-            "duration": info["duration"],
-            "like_count": info["like_count"],
-            "timestamp": info["timestamp"],
-            "audio_codec": info["acodec"],
-            "audio_bitrate": info["abr"],
-            "audio_sampling_rate": info["asr"],
+            "title": info.get('title'),
+            "description": info.get("description"),
+            "duration": info.get("duration"),
+            "like_count": info.get("like_count"),
+            "timestamp": info.get("timestamp"),
+            "audio_codec": info.get("acodec"),
+            "audio_bitrate": info.get("abr"),
+            "audio_sampling_rate": info.get("asr"),
         })
 
     new_df = pd.DataFrame(_new_row)
