@@ -14,11 +14,6 @@ def main():
     file_path: pathlib.Path = pathlib.Path('./data/datatest.csv')
     df: pd.DataFrame = pd.read_csv(file_path)
     
-    # Should consider to use generator instead
-    # video_urls: list[str] = df['video'].to_list()
-    
-    # # for index, url in enumerate(video_urls, start=1):
-    # #     extract_audio(index, url)
     _new_row = []
     for _, row in df.iterrows():
         row_id = row['id']
